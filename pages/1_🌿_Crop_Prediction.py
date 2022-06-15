@@ -6,8 +6,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import plotly.figure_factory as ff
 
-model = pickle.load(open('model.pkl', 'rb'))
-df = pd.read_csv("crop_recommendation.csv")
+model = pickle.load(open('pages/model.pkl', 'rb'))
+df = pd.read_csv("pages/crop_recommendation.csv")
 
 converts_dict = {
     'Nitrogen': 'N',

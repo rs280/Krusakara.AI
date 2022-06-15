@@ -11,14 +11,13 @@ import plotly.graph_objs as go
 
 st.title('Wheat Futures Price History & Prediction App:')
 
-stocks = ['Wheat','Rice',]
+stocks = ['Wheat','Rice','Corn', 'Oat', 'Soybean','Cocoa','Coffee','Cotton','Sugar']
 selected_stocks = st.selectbox("Select Your Future", stocks)
 
 START = st.date_input('Start', value=pd.to_datetime("2017-01-01"))
 TODAY = st.date_input('End(Today)', value=pd.to_datetime("today"))
-st.write('We will predict 4 months into the future because that is how long wheat takes to grow.')
 
-n_years = 120
+n_years = st.slider('Days of prediction:', 1, 365, 365)
 period = n_years * 1
 
 
@@ -30,7 +29,24 @@ def load_data(ticker):
 
 
 data_load_state = st.text("Loading Data...")
-data = load_data(selected_stocks)
+if selected_stocks == 'Wheat':
+    data = load_data('ZW=F')
+if selected_stocks == 'Rice':
+    data = load_data('ZR=F')
+if selected_stocks == 'Corn':
+    data = load_data('ZC=F')
+if selected_stocks == 'Oat':
+    data = load_data('ZO=F')
+if selected_stocks == 'Soybean':
+    data = load_data('ZS=F')
+if selected_stocks == 'Cocoa':
+    data = load_data('CC=F')
+if selected_stocks == 'Coffee':
+    data = load_data('KC=F')
+if selected_stocks == 'Cotton':
+    data = load_data('CT=F')
+if selected_stocks == 'Sugar':
+    data = load_data('SB=F')
 data_load_state.text('Loading Data...Done!')
 
 st.subheader('Raw Data (Last 7 Days):')
