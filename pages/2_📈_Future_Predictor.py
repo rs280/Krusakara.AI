@@ -9,7 +9,7 @@ from prophet.plot import plot_plotly as pplt
 import plotly.graph_objs as go
 
 
-st.title('Wheat Futures Price History & Prediction App:')
+st.title('Futures Price History & Prediction App:')
 
 stocks = ['Wheat','Rice','Corn', 'Oat', 'Soybean','Cocoa','Coffee','Cotton','Sugar']
 selected_stocks = st.selectbox("Select Your Future", stocks)
