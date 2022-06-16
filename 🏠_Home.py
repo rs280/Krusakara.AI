@@ -3,9 +3,9 @@ import pandas as pd
 import streamlit as st
 
 st.set_page_config(
-   page_title="AgriAI App",
+   page_title="କୃଷକ.AI  ",
    page_icon="favicon.ico")
-st.title('Welcome to AgriAI App')
+st.title('Welcome to କୃଷକ.AI')
 
 st.subheader('First, go to the "Crop Prediction" page to see the prediction of the crop based on your soil.')
 
