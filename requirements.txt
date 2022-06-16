@@ -1,10 +1,9 @@
-dependecies: 
-    - seaborn
-    - pandas_datareader
-    - prophet
-    - plotly
-    - pandas
-    - numpy
-    - matplotlib
-    - streamlit
-    - pickle
+seaborn
+pandas_datareader
+prophet
+plotly
+pandas
+numpy
+matplotlib
+streamlit
+pickle
