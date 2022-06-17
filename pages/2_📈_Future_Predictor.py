@@ -66,12 +66,7 @@ plot_raw_date()
 df_train = data[['Date', 'Close']]
 df_train = df_train.rename(columns={'Date': 'ds', 'Close': 'y'})
 
-model = NeuralProphet(
-    yearly_seasonality=False,
-    weekly_seasonality=False,
-    daily_seasonality=False,
-    
-)
+model = NeuralProphet(  )
 ## split teh data into train and test
 
 
