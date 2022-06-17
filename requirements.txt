@@ -8,4 +8,4 @@ prophet==1.0.1
 scikit_learn==1.1.1
 seaborn==0.11.2
 streamlit==1.10.0
-pystan==2.19.1.1
+Pystan==2.19.1.1
