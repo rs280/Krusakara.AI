@@ -74,8 +74,8 @@ model = NeuralProphet(
 )
 ## split teh data into train and test
 
-model.add_lagged_regressor(names='A')
-model.fit(df_train,freq='D')
+
+model.fit(df_train,freq='A')
 
 future = model.make_future_dataframe(df_train,periods=period)
 forecast = model.predict(future)
