@@ -66,11 +66,11 @@ plot_raw_date()
 df_train = data[['Date', 'Close']]
 df_train = df_train.rename(columns={'Date': 'ds', 'Close': 'y'})
 
-model = NeuralProphet(  )
+model = NeuralProphet()
 ## split teh data into train and test
 
 
-model.fit(df_train,freq='A')
+model.fit(df_train)
 
 future = model.make_future_dataframe(df=df_train,periods=period)
 forecast = model.predict(df=future)
