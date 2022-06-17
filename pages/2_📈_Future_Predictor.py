@@ -4,7 +4,7 @@
 import streamlit as st
 import pandas_datareader as pdr
 import pandas as pd
-from prophet import Prophet
+from neuralprophet import NeuralProphet
 from prophet.plot import plot_plotly as pplt
 import plotly.graph_objs as go
 
@@ -67,13 +67,18 @@ plot_raw_date()
 df_train = data[['Date', 'Close']]
 df_train = df_train.rename(columns={'Date': 'ds', 'Close': 'y'})
 
-model = Prophet()
+model = NeuralProphet(
+    yearly_seasonality=False,
+    weekly_seasonality=False,
+    daily_seasonality=False,
+    
+)
 ## split teh data into train and test
 
+model.add_lagged_regressor(names='A')
+model.fit(df_train,freq='D')
 
-model.fit(df_train)
-
-future = model.make_future_dataframe(periods=period,freq='D')
+future = model.make_future_dataframe(df_train,periods=period)
 forecast = model.predict(future)
 
 st.subheader('Raw Predicted Data')
@@ -84,22 +89,20 @@ st.write(forecast.tail(7))
 
 
 fig2 = go.Figure()
-fig2.add_trace(go.Scatter(x=forecast['ds'], y=forecast['yhat'], name='Predicted Price'))
-fig2.add_trace(go.Scatter(x=forecast['ds'], y=forecast['yhat_upper'], name='Predicted Price Upper Bound'))
-fig2.add_trace(go.Scatter(x=forecast['ds'], y=forecast['yhat_lower'], name='Predicted Price Lower Bound'))
+fig2.add_trace(go.Scatter(x=forecast['ds'], y=forecast['yhat1'], name='Predicted Price'))
 fig2.add_trace(go.Scatter(x=data['Date'], y=data['Close'], name='Adj Close Price'))
 fig2.layout.update(title_text='Predicted Price', xaxis_rangeslider_visible=True)
 st.plotly_chart(fig2) 
 
-if (forecast['yhat'][n_years+1370]>data['Close'][1370]):
+if (forecast['yhat1'][n_years+1370]>data['Close'][1370]):
     st.write('The predicted price will be higher than the current price')
-    price = forecast['yhat'][n_years+1370]-data['Close'][1370]
+    price = forecast['yhat1'][n_years+1370]-data['Close'][1370]
     st.write('The predicted price will be higher than the current price by', price)
     land = st.slider('How many acres of land do you own?', 0, 100, 50)
     st.write('If you use all of your land to harvest wheat, you will earn', (land*40/5000)*forecast['yhat'][n_years+1370] , 'in total.')
-elif (forecast['yhat'][n_years+1370]<data['Close'][1370]):
+elif (forecast['yhat1'][n_years+1370]<data['Close'][1370]):
     st.write('The predicted price will be lower than the current price')
-    price = data['Close'][1370]-forecast['yhat'][n_years+1370]
+    price = data['Close'][1370]-forecast['yhat1'][n_years+1370]
     st.write('The predicted price will be lower than the current price by $', price)
     st.subheader('How many acres of  land do you own?')
     land = st.slider('', 0, 100, 50)
