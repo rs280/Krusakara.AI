@@ -72,8 +72,8 @@ model = NeuralProphet(  )
 
 model.fit(df_train,freq='A')
 
-future = model.make_future_dataframe(df_train,periods=period)
-forecast = model.predict(future)
+future = model.make_future_dataframe(df=df_train,periods=period)
+forecast = model.predict(df=future)
 
 st.subheader('Raw Predicted Data')
 st.write(forecast.tail(7))
