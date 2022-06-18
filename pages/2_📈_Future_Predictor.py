@@ -49,14 +49,14 @@ if selected_stocks == 'Cotton':
 if selected_stocks == 'Sugar':
     data = load_data('SB=F')
 data_load_state.text('Loading Data...Done!')
-st.subheader('Raw Data (Last 7 Days):')
+st.subheader('Actual Prices (Last 7 Days):')
 st.write(data.tail(7))
 
 
 def plot_raw_date():
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=data['Date'], y=data['Close'], name='Actual Close Price'))
-    fig.layout.update(title_text='Time Series Data', xaxis_rangeslider_visible=True)
+    fig.add_trace(go.Scatter(x=data['Date'], y=data['Close'], name='Actual Close Price'), y="Close Prices",  x="Date")
+    fig.layout.update(title_text='Actual Price', xaxis_rangeslider_visible=True)
     st.plotly_chart(fig)
 
 
