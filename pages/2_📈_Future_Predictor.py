@@ -88,15 +88,15 @@ fig2.add_trace(go.Scatter(x=data['Date'], y=data['Close'], name='Adj Close Price
 fig2.layout.update(title_text='Predicted Price', xaxis_rangeslider_visible=True)
 st.plotly_chart(fig2) 
 
-if (forecast['yhat1'][n_years-1]>data['Close'][size]):
+if (forecast['yhat1'][period-1]>data['Close'][size]):
     st.write('The predicted price will be higher than the current price')
     price = forecast['yhat1'][n_years+size]-data['Close'][size]
     st.write('The predicted price will be higher than the current price by', price)
     land = st.slider('How many acres of land do you own?', 0, 100, 50)
     st.write('If you use all of your land to harvest wheat, you will earn', (land*40/5000)*forecast['yhat'][n_years+1370] , 'in total.')
-elif (forecast['yhat1'][n_years-1]<data['Close'][size]):
+elif (forecast['yhat1'][period-1]<data['Close'][size]):
     st.write('The predicted price will be lower than the current price')
-    price = data['Close'][size]-forecast['yhat1'][n_years-1]
+    price = data['Close'][size]-forecast['yhat1'][period-1]
     st.write('The predicted price will be lower than the current price by $', price)
     st.subheader('How many acres of  land do you own?')
     land = st.slider('', 0, 100, 50)
