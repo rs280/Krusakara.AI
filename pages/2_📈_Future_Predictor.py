@@ -85,7 +85,8 @@ model.fit(df_train,freq='B')
 
 future = model.make_future_dataframe(df=df_train,periods=period)
 forecast = model.predict(df=future)
-
+forecast = forecast.rename(columns={'ds': 'Date', 'yhat': 'Close'})
+forecast = forecast[['Date', 'Close']]
 st.subheader('Raw Predicted Data')
 st.write(forecast.tail(7))
 
