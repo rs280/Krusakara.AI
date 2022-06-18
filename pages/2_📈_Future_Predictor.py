@@ -32,22 +32,32 @@ def load_data(ticker):
 data_load_state = st.text("Loading Data...")
 if selected_stocks == 'Wheat':
     data = load_data('ZW=F')
+    data = data[['Date', 'Close']]
 if selected_stocks == 'Rice':
     data = load_data('ZR=F')
+    data = data[['Date', 'Close']]
 if selected_stocks == 'Corn':
     data = load_data('ZC=F')
+    data = data[['Date', 'Close']]
 if selected_stocks == 'Oat':
     data = load_data('ZO=F')
+    data = data[['Date', 'Close']]
 if selected_stocks == 'Soybean':
     data = load_data('ZS=F')
+    data = data[['Date', 'Close']]
 if selected_stocks == 'Cocoa':
     data = load_data('CC=F')
+    data = data[['Date', 'Close']]
 if selected_stocks == 'Coffee':
     data = load_data('KC=F')
+    data = data[['Date', 'Close']]
 if selected_stocks == 'Cotton':
     data = load_data('CT=F')
+    data = data[['Date', 'Close']]
 if selected_stocks == 'Sugar':
     data = load_data('SB=F')
+    data = data[['Date', 'Close']]
+data = data[['Date', 'Close']]
 data_load_state.text('Loading Data...Done!')
 st.subheader('Actual Prices (Last 7 Days):')
 st.write(data.tail(7))
@@ -55,7 +65,7 @@ st.write(data.tail(7))
 
 def plot_raw_date():
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=data['Date'], y=data['Close'], name='Actual Close Price'), y="Close Prices",  x="Date")
+    fig.add_trace(go.Scatter(x=data['Date'], y=data['Close'], name='Actual Close Price'))
     fig.layout.update(title_text='Actual Price', xaxis_rangeslider_visible=True)
     st.plotly_chart(fig)
 
@@ -64,7 +74,7 @@ plot_raw_date()
 
 # Forecasting
 
-df_train = data[['Date', 'Close']]
+df_train = data
 df_train = df_train.rename(columns={'Date': 'ds', 'Close': 'y'})
 size = len(df_train)
 model = NeuralProphet()
