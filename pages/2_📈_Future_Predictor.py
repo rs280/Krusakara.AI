@@ -95,7 +95,7 @@ st.write(forecast.tail(7))
 
 
 fig2 = go.Figure()
-fig2.add_trace(go.Scatter(x=forecast['ds'], y=forecast['yhat1'], name='Predicted Price'))
+fig2.add_trace(go.Scatter(x=forecast['Date'], y=forecast['Close'], name='Predicted Price'))
 fig2.add_trace(go.Scatter(x=data['Date'], y=data['Close'], name='Adj Close Price'))
 fig2.layout.update(title_text='Predicted Price', xaxis_rangeslider_visible=True,xaxis_title='Date', yaxis_title='Close Price')
 st.plotly_chart(fig2) 
