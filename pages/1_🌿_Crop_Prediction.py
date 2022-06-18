@@ -6,6 +6,9 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import plotly.figure_factory as ff
 
+st.set_page_config(
+   page_title="କୃଷକ.AI  ",
+   page_icon="favicon.ico")
 model = pickle.load(open('pages/model.pkl', 'rb'))
 df = pd.read_csv("pages/crop_recommendation.csv")
 

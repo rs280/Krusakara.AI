@@ -7,7 +7,9 @@ import pandas as pd
 from neuralprophet import NeuralProphet
 import plotly.graph_objs as go
 
-
+st.set_page_config(
+   page_title="କୃଷକ.AI  ",
+   page_icon="favicon.ico")
 st.title('Futures Price History & Prediction App:')
 
 stocks = ['Wheat','Rice','Corn', 'Oat', 'Soybean','Cocoa','Coffee','Cotton','Sugar']
