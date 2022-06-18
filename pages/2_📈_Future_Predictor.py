@@ -47,7 +47,6 @@ if selected_stocks == 'Cotton':
 if selected_stocks == 'Sugar':
     data = load_data('SB=F')
 data_load_state.text('Loading Data...Done!')
-
 st.subheader('Raw Data (Last 7 Days):')
 st.write(data.tail(7))
 
@@ -70,7 +69,7 @@ model = NeuralProphet()
 ## split teh data into train and test
 
 
-model.fit(df_train)
+model.fit(df_train,freq='B')
 
 future = model.make_future_dataframe(df=df_train,periods=period)
 forecast = model.predict(df=future)
@@ -87,16 +86,16 @@ fig2.add_trace(go.Scatter(x=forecast['ds'], y=forecast['yhat1'], name='Predicted
 fig2.add_trace(go.Scatter(x=data['Date'], y=data['Close'], name='Adj Close Price'))
 fig2.layout.update(title_text='Predicted Price', xaxis_rangeslider_visible=True)
 st.plotly_chart(fig2) 
-
-if (forecast.at[forecast.index[-1], 'yhat1']>data['Close'][size]):
+predict = forecast.iloc[-1]['yhat1']
+if (predict>data['Close'][size-1]):
     st.write('The predicted price will be higher than the current price')
-    price = forecast['yhat1'].iloc[-1]-data['Close'][size]
+    price = predict-data['Close'][size-1]
     st.write('The predicted price will be higher than the current price by', price)
     land = st.slider('How many acres of land do you own?', 0, 100, 50)
-    st.write('If you use all of your land to harvest wheat, you will earn', (land*40/5000)*forecast['yhat'][n_years+1370] , 'in total.')
-elif (forecast['yhat1'].iloc[-1]<data['Close'][size]):
+    st.write('If you use all of your land to harvest wheat, you will earn', (land*40/5000)*predict , 'in total.')
+elif (predict<data['Close'][size-1]):
     st.write('The predicted price will be lower than the current price')
-    price = data['Close'][size]-forecast['yhat1'].iloc[-1]
+    price = data['Close'][size-1]-predict
     st.write('The predicted price will be lower than the current price by $', price)
     st.subheader('How many acres of  land do you own?')
     land = st.slider('', 0, 100, 50)
