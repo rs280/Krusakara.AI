@@ -99,7 +99,7 @@ fig2.add_trace(go.Scatter(x=forecast['Date'], y=forecast['Close'], name='Predict
 fig2.add_trace(go.Scatter(x=data['Date'], y=data['Close'], name='Adj Close Price'))
 fig2.layout.update(title_text='Predicted Price', xaxis_rangeslider_visible=True,xaxis_title='Date', yaxis_title='Close Price')
 st.plotly_chart(fig2) 
-predict = forecast.iloc[-1]['yhat1']
+predict = forecast.iloc[-1]['Close']
 if (predict>data['Close'][size-1]):
     st.write('The predicted price will be higher than the current price')
     price = predict-data['Close'][size-1]
