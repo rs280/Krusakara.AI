@@ -105,14 +105,14 @@ if (predict>data['Close'][size-1]):
     price = predict-data['Close'][size-1]
     st.write('The predicted price will be higher than the current price by', price)
     land = st.slider('How many acres of land do you own?', 0, 100, 50)
-    st.write('If you use all of your land to harvest wheat, you will earn', (land*45/5000)*predict , 'in total.')
+    st.write('If you use all of your land to harvest ' + selected_stocks + ', you will earn', (land*45/5000)*predict , 'in total.')
 elif (predict<data['Close'][size-1]):
     st.write('The predicted price will be lower than the current price')
     price = data['Close'][size-1]-predict
     st.write('The predicted price will be lower than the current price by $', price)
     st.subheader('How many acres of  land do you own?')
     land = st.slider('', 0, 100, 50)
-    st.write('It is not advisable to harvest wheat')
+    st.write('It is not advisable to harvest' + selected_stocks)
     
 else:
     st.write('The predicted price will be the same as the current price')
